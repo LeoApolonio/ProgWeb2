@@ -10,7 +10,7 @@ function Edad()
 
 function Estatura()
 {
-    alert(1.70)
+    alert(1.70 + "m")
 }
 
 function Mate()
