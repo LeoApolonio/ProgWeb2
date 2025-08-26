@@ -1,6 +1,6 @@
 function Nombre()
 {
-    alert("Hola")
+    alert("Leonardo Apolonio Villagomez")
 }
 
 function Edad()
