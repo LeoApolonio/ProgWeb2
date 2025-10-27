@@ -100,7 +100,7 @@ do
   if (opcion === null) break; // cancelar = salir
   opcion = Number(opcion);
 
-  if (!jugando && opcion !== 9 && opcion !== 10) 
+    if (!jugando && opcion !== 9 && opcion !== 10) 
     {
         alert("El juego termino. Reinicia para volver a jugar.");
         continue;
