@@ -1,3 +1,8 @@
+//Apolonio Villagómez Leonardo
+//Programación Web II
+//Grupo 1710
+//FES Aragón
+
 function generarQR() 
 {
     // Obtener los datos.

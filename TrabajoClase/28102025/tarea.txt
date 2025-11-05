@@ -1,0 +1,6 @@
+Servidor de no
+
+realizar un servidor http, otro con express en el que monte texto plano
+
+un repo con dos carpetas:
+1,- 
