@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Usuarios registrados</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Carrera</th>
+        <th>Semestre</th>
+        <th>Fecha registro</th>
+        <th>Acciones</th>
+    </tr>
+
+    <% users.forEach(user => { %>
+    <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.carrera %></td>
+        <td><%= user.semestre %></td>
+        <td><%= user.fecha_registro %></td>
+        <td>
+            <a href="/edit/<%= user.id %>">Editar</a>
+            <a href="/delete/<%= user.id %>">Eliminar</a>
+        </td>
+    </tr>
+    <% }); %>
+</table>
+
+<hr>
+
+<h2>Agregar usuario</h2>
+<form action="/add" method="post">
+
+    <label>Nombre:</label>
+    <input type="text" name="name" required>
+
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <label>Contraseña:</label>
+    <input type="password" name="password" required>
+
+    <label>Carrera:</label>
+    <input type="text" name="carrera" required>
+
+    <label>Semestre:</label>
+    <input type="number" name="semestre" min="1" max="12" required>
+
+    <button type="submit">Agregar</button>
+</form>
+
+<a href="/logout">Cerrar sesión</a>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar usuario</title>
+</head>
+<body>
+
+<h1>Editar usuario</h1>
+
+<form action="/update/<%= user.id %>" method="post">
+
+    <label>Nombre:</label>
+    <input type="text" name="name" value="<%= user.name %>" required>
+
+    <label>Email:</label>
+    <input type="email" name="email" value="<%= user.email %>" required>
+
+    <label>Carrera:</label>
+    <input type="text" name="carrera" value="<%= user.carrera %>" required>
+
+    <label>Semestre:</label>
+    <input type="number" min="1" max="12" name="semestre" value="<%= user.semestre %>" required>
+
+    <button type="submit">Actualizar</button>
+</form>
+
+<a href="/panel">Volver</a>
+
+</body>
+</html>
