@@ -1,3 +1,317 @@
-body{
-    background-color: aquamarine;
+/* ===========================
+      ESTILOS GENERALES
+=========================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 0;         /* margen superior e inferior */
+    font-family: "Segoe UI", sans-serif;
+    background: #f6f6f6;
+    color: #333;
+}
+
+/* Contenedores */
+.container,
+.panel-container {
+    width: 80%;              /* antes 90% → más centrado */
+    max-width: 750px;        /* antes 1000px → más compacto */
+    margin: 40px auto;
+    background: #fff;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+/* Títulos */
+h1, h2 {
+    color: #F51128;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+/* ===========================
+            TABLA
+=========================== */
+
+/* Nuevo: wrapper centrado */
+.table-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Tabla más pequeña y estética */
+table {
+    width: 95%;               /* antes 100% */
+    max-width: 700px;         /* nuevo límite */
+    border-collapse: collapse;
+    margin: 18px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th {
+    background: #F51128;
+    color: white;
+    padding: 13px;
+    text-align: left;
+    font-size: 15px;
+}
+
+table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 14px;
+}
+
+table tr:hover {
+    background: #ffe8ea;
+}
+
+/* ===========================
+          BOTONES
+=========================== */
+button,
+.btn {
+    padding: 9px 16px;
+    border: none;
+    cursor: pointer;
+    background: #F51128;
+    color: white;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+    background: #c40f20;
+}
+
+.btn-secondary {
+    background: #666;
+}
+
+.btn-secondary:hover {
+    background: #444;
+}
+
+a.btn {
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* ===========================
+         FORMULARIOS
+=========================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: 0.2s;
+    width: 100%;
+}
+
+input:focus {
+    border-color: #F51128;
+    outline: none;
+    box-shadow: 0 0 5px rgba(245, 17, 40, 0.35);
+}
+
+/* ===========================
+     ACCIONES DE TABLA
+=========================== */
+.action-links a {
+    margin-right: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.action-edit {
+    color: #0d6efd;
+}
+
+.action-edit:hover {
+    text-decoration: underline;
+}
+
+.action-delete {
+    color: #F51128;
+}
+
+.action-delete:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+           LOGIN
+=========================== */
+.login-box {
+    width: 340px;
+    margin: 90px auto;
+    padding: 28px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+}
+
+.login-box h1 {
+    margin-bottom: 25px;
+}
+
+/* ===========================
+    ERRORES Y FOOTER
+=========================== */
+.error {
+    color: #F51128;
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+/* ===========================
+      BOTONES SUPERIORES
+   (Añadir usuario y Logout)
+=========================== */
+.top-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.top-actions .btn {
+    margin: 0;
+}
+
+/* ===========================
+           LOGOUT
+=========================== */
+.logout {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.logout a {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #F51128;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.logout a:hover {
+    background: #c40f20;
+}
+
+/* ===========================
+           MODALES
+=========================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+    padding: 18px;
+}
+
+/* Ventana del modal (compacta y centrada) */
+.modal-content {
+    background: #fff;
+    padding: 22px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 360px;
+    max-height: 78vh;
+    overflow-y: auto;
+    box-shadow: 0 6px 26px rgba(0,0,0,0.45);
+    position: relative;
+    animation: fadeIn 0.22s ease-out;
+}
+
+/* Botón X */
+.close,
+.modal .close {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    font-size: 23px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #F51128;
+    border: none;
+    background: transparent;
+}
+
+/* Botones dentro del modal */
+.modal-actions {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* Mensajes */
+.msg {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #F51128;
+    min-height: 20px;
+}
+
+/* ===========================
+        BIENVENIDA
+=========================== */
+.welcome-box {
+    background: #F51128;
+    color: white;
+    padding: 22px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 0 auto 25px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+
+.welcome-box h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.welcome-box p {
+    margin-top: 6px;
+    font-size: 15px;
 }

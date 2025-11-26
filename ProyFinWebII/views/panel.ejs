@@ -2,64 +2,140 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Panel de registros</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
-<h1>Usuarios registrados</h1>
+<header class="topbar">
+    <h1>Panel de registros</h1>
+    <div class="top-actions">
+        <button id="openAdd" class="btn primary">Agregar registro</button>
+        <a href="/logout" class="btn danger">Cerrar sesión</a>
+    </div>
+</header>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>Carrera</th>
-        <th>Semestre</th>
-        <th>Fecha registro</th>
-        <th>Acciones</th>
-    </tr>
+<div class="welcome-box">
+    <h2 style="color: white;">Bienvenido, <%= user.name %></h2>
+</div>
 
-    <% users.forEach(user => { %>
-    <tr>
-        <td><%= user.id %></td>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.carrera %></td>
-        <td><%= user.semestre %></td>
-        <td><%= user.fecha_registro %></td>
-        <td>
-            <a href="/edit/<%= user.id %>">Editar</a>
-            <a href="/delete/<%= user.id %>">Eliminar</a>
-        </td>
-    </tr>
-    <% }); %>
-</table>
+<section class="table-container">
+    <table class="styled-table" id="usersTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Carrera</th>
+            <th>Semestre</th>
+            <th>Registro</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% users.forEach(record => { %>
+        <tr data-id="<%= record.id %>"
+            data-name="<%= record.name %>"
+            data-email="<%= record.email %>"
+            data-carrera="<%= record.carrera %>"
+            data-semestre="<%= record.semestre %>">
 
-<hr>
+            <td><%= record.id %></td>
+            <td><%= record.name %></td>
+            <td><%= record.email %></td>
+            <td><%= record.carrera %></td>
+            <td><%= record.semestre %></td>
+            <td><%= record.fecha_registro %></td>
 
-<h2>Agregar usuario</h2>
-<form action="/add" method="post">
+            <td class="actions">
+                <button class="btn small edit btn-edit" data-id="<%= record.id %>">Editar</button>
+                <button class="btn small danger btn-delete" data-id="<%= record.id %>">Eliminar</button>
+            </td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</section>
 
-    <label>Nombre:</label>
-    <input type="text" name="name" required>
+<!-- Modal - Edición -->
+<div class="modal" id="modalEdit" style="display:none" aria-hidden="true">
+    <div class="modal-content">
+        <button class="modal-close" data-close="modalEdit">&times;</button>
+        <h2>Editar registro</h2>
 
-    <label>Email:</label>
-    <input type="email" name="email" required>
+        <form id="formEdit">
+            <input type="hidden" id="editId">
 
-    <label>Contraseña:</label>
-    <input type="password" name="password" required>
+            <label>Nombre</label>
+            <input type="text" id="editName" required>
 
-    <label>Carrera:</label>
-    <input type="text" name="carrera" required>
+            <label>Email</label>
+            <input type="email" id="editEmail" required>
 
-    <label>Semestre:</label>
-    <input type="number" name="semestre" min="1" max="12" required>
+            <label>Carrera</label>
+            <input type="text" id="editCarrera" required>
 
-    <button type="submit">Agregar</button>
-</form>
+            <label>Semestre</label>
+            <input type="number" min="1" max="12" id="editSemestre" required>
 
-<a href="/logout">Cerrar sesión</a>
+            <p class="msg" id="editMsg"></p>
 
+            <div class="modal-actions">
+                <button class="btn primary">Confirmar</button>
+                <button type="button" class="btn" data-close="modalEdit">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal - Eliminar -->
+<div class="modal" id="modalDelete" style="display:none" aria-hidden="true">
+    <div class="modal-content">
+        <button class="modal-close" data-close="modalDelete">&times;</button>
+        <h2>Eliminar registro</h2>
+
+        <p>¿Seguro que deseas eliminar a:  
+            <strong id="deleteName"></strong>?  
+            (ID: <span id="deleteId"></span>)</p>
+
+        <p class="msg" id="deleteMsg"></p>
+
+        <div class="modal-actions">
+            <button id="confirmDelete" class="btn danger">Eliminar</button>
+            <button type="button" class="btn" data-close="modalDelete">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal - Agregar -->
+<div class="modal" id="modalAdd" style="display:none" aria-hidden="true">
+    <div class="modal-content">
+        <button class="modal-close" data-close="modalAdd">&times;</button>
+        <h2>Agregar registro</h2>
+
+        <form id="formAdd" action="/add" method="post">
+            <label>Nombre</label>
+            <input type="text" name="name" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Carrera</label>
+            <input type="text" name="carrera" required>
+
+            <label>Semestre</label>
+            <input type="number" name="semestre" min="1" max="12" required>
+
+            <p class="msg" id="addMsg"></p>
+
+            <div class="modal-actions">
+                <button class="btn primary">Agregar</button>
+                <button type="button" class="btn" data-close="modalAdd">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/script.js"></script>
 </body>
 </html>
